@@ -1,15 +1,15 @@
 # PROJECT TITLE: International Breweries sales performance between 2015 and 2017
 ## PROJECT OUTLINE
 1.	[Project Overview](#project-overview)
-2.	[Data Sources](data-sources)
-3.	[Tools Used](tools-used)
+2.	[Data Sources](#data-sources)
+3.	[Tools Used](#tools-used)
 4.	[Data Cleaning and Preparation](#data-cleaning-and-preparation)
 5.	[Exploratory Data Analysis](#exploratory-data-analysis)
 6.	[Data Analysis](#data-analysis)
-7.	[Results/Findings](#results/findings)
+7.	[Results and Findings](#results-and-findings)
 8.	[Recommendations](#recommendations)
 
-## Project Overview
+### Project Overview
 ## Data Sources:
 ## Tools Used:
 - Structured Query Language - for data querying
@@ -77,3 +77,60 @@
   GROUP BY Sales_rep
   ORDER  BY 2 DESC
   ```
+2. GEOGRAPHIC ANALYSIS
+- Which country has the highest sales revenue?
+  ```
+  SELECT top 1 Countries, Sum(Cost) AS Total_Cost
+  FROM [dbo].[International Breweries]
+  GROUP BY Countries 
+  ORDER BY 2 DESC
+  ```
+
+- What is the sales distribution by region?
+  ```
+  SELECT region, sum(cost) from [dbo].[International Breweries]
+  GROUP BY region
+  ```
+3. PRODUCT ANALYSIS
+- What brand has the highest sales quantity?
+  ```
+  SELECT TOP 1 brands, sum(quantity) AS Total_Quantity from [dbo].[International Breweries]
+  GROUP BY brands
+  ORDER BY Total_Quantity DESC 
+  ```
+- What is the average unit price by brand?
+  ```
+  SELECT Brands, AVG(Unit_Price) AS Avg_Unit_Price FROM [dbo].[International Breweries]
+  GROUP BY brands
+  ```
+- What brand has the highest profit?
+  ```
+  SELECT Brands,Sum(Profit) AS Total_profit from [dbo].[International Breweries]
+  GROUP BY Brands
+  ORDER BY Sum(Profit) DESC
+  ```
+4. TIME BASED ANALYSIS
+- What is the monthly sales trend?
+  ```
+  SELECT Months, Sum(Cost)AS Monthly_sale from [dbo].[International Breweries]
+  GROUP BY Months
+  ORDER BY 2 DESC
+  ```
+- Which quarter has the highest sales revenue?
+  ```
+  ALTER TABLE [dbo].[International Breweries]
+  ADD [Quarter] varchar(5)
+
+  UPDATE [dbo].[International Breweries]
+  SET [Quarter] = CASE
+	WHEN MONTHS IN ('January', 'February', 'March') THEN 'Q1'
+	WHEN MONTHS IN ('April', 'May', 'June') THEN 'Q2'
+	WHEN MONTHS IN ('July', 'August', 'September') THEN 'Q3'
+	ELSE 'Q4'
+  END;
+
+  SELECT TOP 1 [Quarter], Sum(Cost) FROM [dbo].[International Breweries]
+  GROUP BY [Quarter]
+  ORDER BY Sum(Cost) DESC
+  ```
+  
