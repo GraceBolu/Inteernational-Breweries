@@ -9,7 +9,7 @@
 7.	[Results and Findings](#results-and-findings)
 8.	[Recommendations](#recommendations)
 
-### Project Overview
+## Project Overview
 ## Data Sources:
 ## Tools Used:
 - Structured Query Language - for data querying
@@ -133,4 +133,12 @@
   GROUP BY [Quarter]
   ORDER BY Sum(Cost) DESC
   ```
-  
+ ## Results and Findings
+ 1. SALES PERFORMANCE
+- What is the total cost price by year?
+  ![]()
+- What is the total sales revenue for each year?
+- What is the total profit by year?
+- What are the top 5 sales rep by total sales?
+- What sales rep has the highest total sales?
+
